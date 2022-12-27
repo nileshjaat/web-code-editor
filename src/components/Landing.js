@@ -212,13 +212,11 @@ const Landing = () => {
 
       <div className="flex flex-row">
         <div className="px-4 py-2">
+          <h4 className="mb-1">Language</h4>
           <LanguagesDropdown onSelectChange={onSelectChange} />
         </div>
-        <div className="px-4 py-2">
-          <ThemeDropdown handleThemeChange={handleThemeChange} theme={theme} />
-        </div>
       </div>
-      <div className="flex flex-row space-x-4 items-start px-4 py-4">
+      <div className="flex flex-row space-x-4 items-start px-4 py-2">
         <div className="flex flex-col w-full h-full justify-start items-end">
           <CodeEditorWindow
             code={code}
@@ -226,11 +224,17 @@ const Landing = () => {
             language={language?.value}
             theme={theme.value}
           />
+          <div className="py-4">
+            <h4 className="mb-1">Editor Theme</h4>
+            <ThemeDropdown
+              handleThemeChange={handleThemeChange}
+              theme={theme}
+            />
+          </div>
         </div>
 
-        <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
-          <OutputWindow outputDetails={outputDetails} />
-          <div className="flex flex-col items-end">
+        <div className="right-container flex flex-shrink-0 w-[35%] flex-col">
+          <div className="flex flex-col items-start">
             <CustomInput
               customInput={customInput}
               setCustomInput={setCustomInput}
@@ -239,12 +243,15 @@ const Landing = () => {
               onClick={handleCompile}
               disabled={!code}
               className={classnames(
-                'mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0',
+                'mt-4 border-2 border-black z-10 rounded-md px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0',
                 !code ? 'opacity-50' : ''
               )}
             >
               {processing ? 'Processing...' : 'Compile and Execute'}
             </button>
+          </div>
+          <div className="py-4">
+            <OutputWindow outputDetails={outputDetails} />
           </div>
           {outputDetails && <OutputDetails outputDetails={outputDetails} />}
         </div>
